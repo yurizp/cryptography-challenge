@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: challange-cryptography
+  jackson:
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
