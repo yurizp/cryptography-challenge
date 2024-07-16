@@ -1,4 +1,6 @@
-package br.com.yurizp.cryptography.domain.error;
+package br.com.yurizp.cryptography.domain.error.imp;
+
+import br.com.yurizp.cryptography.domain.error.Error;
 
 import java.util.List;
 

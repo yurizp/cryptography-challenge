@@ -1,4 +1,4 @@
-package br.com.yurizp.cryptography.domain.error;
+package br.com.yurizp.cryptography.domain.error.imp;
 
 import java.util.List;
 
@@ -9,4 +9,5 @@ public record SimpleError(String code, String message, List<SimpleError> datails
     public SimpleError(String code, String message) {
         this(code, message, null);
     }
+
 }

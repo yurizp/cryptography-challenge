@@ -1,4 +1,4 @@
-package br.com.yurizp.cryptography.domain.port.interfaces;
+package br.com.yurizp.cryptography.domain.port;
 
 import br.com.yurizp.cryptography.domain.dto.UserDto;
 

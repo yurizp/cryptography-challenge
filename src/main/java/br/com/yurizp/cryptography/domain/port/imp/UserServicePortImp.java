@@ -1,7 +1,7 @@
-package br.com.yurizp.cryptography.domain.port.implement;
+package br.com.yurizp.cryptography.domain.port.imp;
 
 import br.com.yurizp.cryptography.domain.dto.UserDto;
-import br.com.yurizp.cryptography.domain.port.interfaces.UserServicePort;
+import br.com.yurizp.cryptography.domain.port.UserServicePort;
 import org.springframework.stereotype.Component;
 
 @Component

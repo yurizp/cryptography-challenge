@@ -1,11 +1,11 @@
 package br.com.yurizp.cryptography.controllers.error;
 
-import br.com.yurizp.cryptography.domain.error.BadRequestError;
-import br.com.yurizp.cryptography.domain.error.ConflictError;
+import br.com.yurizp.cryptography.domain.error.imp.BadRequestError;
+import br.com.yurizp.cryptography.domain.error.imp.ConflictError;
 import br.com.yurizp.cryptography.domain.error.Error;
 import br.com.yurizp.cryptography.domain.error.ErrorBuilder;
-import br.com.yurizp.cryptography.domain.error.NotFoundError;
-import br.com.yurizp.cryptography.domain.error.SimpleError;
+import br.com.yurizp.cryptography.domain.error.imp.NotFoundError;
+import br.com.yurizp.cryptography.domain.error.imp.SimpleError;
 import io.micrometer.common.util.StringUtils;
 import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;

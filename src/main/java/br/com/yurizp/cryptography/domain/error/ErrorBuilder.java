@@ -1,5 +1,7 @@
 package br.com.yurizp.cryptography.domain.error;
 
+import br.com.yurizp.cryptography.domain.error.imp.InternalServerError;
+import br.com.yurizp.cryptography.domain.error.imp.SimpleError;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;

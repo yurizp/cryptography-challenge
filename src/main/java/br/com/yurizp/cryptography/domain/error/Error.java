@@ -1,5 +1,7 @@
 package br.com.yurizp.cryptography.domain.error;
 
+import br.com.yurizp.cryptography.domain.error.imp.SimpleError;
+
 import java.util.List;
 
 public abstract class Error extends Throwable {

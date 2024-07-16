@@ -2,7 +2,7 @@ package br.com.yurizp.cryptography.controllers;
 
 import br.com.yurizp.cryptography.controllers.request.UserRequest;
 import br.com.yurizp.cryptography.domain.dto.UserDto;
-import br.com.yurizp.cryptography.domain.port.interfaces.UserServicePort;
+import br.com.yurizp.cryptography.domain.port.UserServicePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
