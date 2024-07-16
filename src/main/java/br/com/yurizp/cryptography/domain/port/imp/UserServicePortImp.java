@@ -1,20 +1,42 @@
 package br.com.yurizp.cryptography.domain.port.imp;
 
-import br.com.yurizp.cryptography.domain.dto.UserDto;
+import br.com.yurizp.cryptography.domain.dto.UserDTO;
+import br.com.yurizp.cryptography.domain.dto.imp.UserDTOImp;
+import br.com.yurizp.cryptography.domain.model.User;
+import br.com.yurizp.cryptography.domain.port.EncryptionServicePort;
 import br.com.yurizp.cryptography.domain.port.UserServicePort;
+import br.com.yurizp.cryptography.infrastructure.database.UserRepositoryPort;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class UserServicePortImp implements UserServicePort {
+@Slf4j
+@Service
+@AllArgsConstructor
+class UserServicePortImp implements UserServicePort {
+
+    private UserRepositoryPort userRepository;
+    private EncryptionServicePort encryptionServicePort;
 
     @Override
-    public UserDto getById(String id) throws Throwable{
-        return null;
+    public UserDTO findById(Long id) throws Throwable{
+        return userRepository.findById(id).toDto();
     }
 
     @Override
-    public UserDto create(UserDto userDto) throws Throwable {
-        return userDto;
+    public UserDTO saveOrUpdade(UserDTO user) throws Throwable {
+        String creditCardToken = encryptionServicePort.encryptSha512(user.getCreditCardToken());
+        String userDocument = encryptionServicePort.encryptSha512(user.getUserDocument());
+
+        UserDTOImp userDTOEncripted = UserDTOImp.builder()
+                .value(user.getValue())
+                .userDocument(userDocument)
+                .creditCardToken(creditCardToken)
+                .id(user.getId())
+                .build();
+
+        return userRepository.saveOrUpdate(User.create(userDTOEncripted)).toDto();
     }
 
 }

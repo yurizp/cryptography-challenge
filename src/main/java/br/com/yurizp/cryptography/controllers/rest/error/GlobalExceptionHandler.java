@@ -1,4 +1,4 @@
-package br.com.yurizp.cryptography.controllers.error;
+package br.com.yurizp.cryptography.controllers.rest.error;
 
 import br.com.yurizp.cryptography.domain.error.imp.BadRequestError;
 import br.com.yurizp.cryptography.domain.error.imp.ConflictError;

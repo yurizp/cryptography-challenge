@@ -1,7 +1,7 @@
-package br.com.yurizp.cryptography.controllers;
+package br.com.yurizp.cryptography.controllers.rest;
 
-import br.com.yurizp.cryptography.controllers.request.UserRequest;
-import br.com.yurizp.cryptography.domain.dto.UserDto;
+import br.com.yurizp.cryptography.controllers.rest.request.UserRequest;
+import br.com.yurizp.cryptography.domain.dto.UserDTO;
 import br.com.yurizp.cryptography.domain.port.UserServicePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +24,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDto findUserById(@PathVariable("id") String id) throws Throwable {
-        return userService.getById(id);
+    public UserDTO findUserById(@PathVariable("id") Long id) throws Throwable {
+        return userService.findById(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto createUser(@RequestBody @Validated UserRequest user) throws Throwable {
-        return userService.create(user);
+    public UserDTO createUser(@RequestBody @Validated UserRequest user) throws Throwable {
+        return userService.saveOrUpdade(user);
     }
-
 }

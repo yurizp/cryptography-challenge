@@ -1,8 +1,9 @@
 package br.com.yurizp.cryptography.controllers;
 
-import br.com.yurizp.cryptography.controllers.error.GlobalExceptionHandler;
-import br.com.yurizp.cryptography.domain.dto.UserDto;
-import br.com.yurizp.cryptography.domain.dto.imp.UserDtoStub;
+import br.com.yurizp.cryptography.controllers.rest.UserController;
+import br.com.yurizp.cryptography.controllers.rest.error.GlobalExceptionHandler;
+import br.com.yurizp.cryptography.domain.dto.UserDTO;
+import br.com.yurizp.cryptography.domain.dto.imp.UserDTOStub;
 import br.com.yurizp.cryptography.domain.error.imp.BadRequestError;
 import br.com.yurizp.cryptography.domain.error.Error;
 import br.com.yurizp.cryptography.domain.error.ErrorBuilder;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -49,8 +51,8 @@ class UserControllerTest {
 
     @Test
     void shouldReturnUserById() throws Throwable {
-        UserDto userDto = UserDtoStub.create();
-        when(userServicePort.getById(anyString())).thenReturn(userDto);
+        UserDTO userDto = UserDTOStub.create();
+        when(userServicePort.findById(anyLong())).thenReturn(userDto);
 
         mockMvc.perform(get(BASE_URL.concat("/123")).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(OK.value()))
@@ -63,7 +65,7 @@ class UserControllerTest {
     @Test
     void shouldReturnNotFoundErrorWhenUserByIdNotExists() throws Throwable {
         Error error = ErrorBuilder.builder().message("not.found.message").code("not.found.errorCode").build(NotFoundError.class);
-        when(userServicePort.getById(anyString())).thenThrow(error);
+        when(userServicePort.findById(anyLong())).thenThrow(error);
 
         mockMvc.perform(get(BASE_URL.concat("/123")).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(NOT_FOUND.value()))
@@ -74,12 +76,12 @@ class UserControllerTest {
     @Test
     void shouldReturnErrorWhenCreateUserThrowException() throws Throwable {
         Error error = ErrorBuilder.builder().message("conflict.message").code("conflict.errorCode").build(BadRequestError.class);
-        when(userServicePort.create(any())).thenThrow(error);
+        when(userServicePort.saveOrUpdade(any())).thenThrow(error);
 
         mockMvc.perform(post(BASE_URL)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(UserDtoStub.createWithoutId()))
+                        .content(objectMapper.writeValueAsString(UserDTOStub.createWithoutId()))
                 )
                 .andExpect(status().is(BAD_REQUEST.value()))
                 .andExpect(jsonPath("$.code").value(error.getSimpleError().code()))
@@ -88,8 +90,8 @@ class UserControllerTest {
 
     @Test
     void shouldCreateUser() throws Throwable {
-        UserDto userDto = UserDtoStub.createWithoutId();
-        when(userServicePort.create(any())).thenReturn(userDto);
+        UserDTO userDto = UserDTOStub.createWithoutId();
+        when(userServicePort.saveOrUpdade(any())).thenReturn(userDto);
 
         mockMvc.perform(post(BASE_URL)
                         .accept(MediaType.APPLICATION_JSON)
@@ -108,7 +110,7 @@ class UserControllerTest {
         mockMvc.perform(post(BASE_URL)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(UserDtoStub.create()))
+                        .content(objectMapper.writeValueAsString(UserDTOStub.create()))
                 )
                 .andExpect(status().is(BAD_REQUEST.value()))
                 .andExpect(jsonPath("$.datails[0].code").value("invalid.arguments"))

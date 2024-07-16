@@ -1,10 +1,10 @@
 package br.com.yurizp.cryptography.domain.port;
 
-import br.com.yurizp.cryptography.domain.dto.UserDto;
+import br.com.yurizp.cryptography.domain.dto.UserDTO;
 
 public interface UserServicePort {
 
-    UserDto getById(String id) throws Throwable;
-    UserDto create(UserDto userDto) throws Throwable;
+    UserDTO findById(Long id) throws Throwable;
+    UserDTO saveOrUpdade(UserDTO userDto) throws Throwable;
 
 }

@@ -1,12 +1,12 @@
-package br.com.yurizp.cryptography.controllers.request;
+package br.com.yurizp.cryptography.controllers.rest.request;
 
-import br.com.yurizp.cryptography.domain.dto.UserDto;
+import br.com.yurizp.cryptography.domain.dto.UserDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Null;
 
-public class UserRequest extends UserDto {
+public class UserRequest extends UserDTO {
 
-    public UserRequest(String id, String userDocument, String creditCardToken, long value) {
+    public UserRequest(Long id, String userDocument, String creditCardToken, long value) {
         super(id, userDocument, creditCardToken, value);
     }
 
@@ -21,7 +21,7 @@ public class UserRequest extends UserDto {
     }
 
     @Null(message = "Not allow send Id.")
-    public String getId(){
+    public Long getId(){
         return super.getId();
     }
 }

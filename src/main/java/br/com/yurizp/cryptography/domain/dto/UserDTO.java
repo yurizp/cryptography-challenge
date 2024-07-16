@@ -1,13 +1,18 @@
 package br.com.yurizp.cryptography.domain.dto;
 
-public abstract class UserDto {
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
-    private final String id;
+@SuperBuilder
+@EqualsAndHashCode
+public abstract class UserDTO {
+
+    private final Long id;
     private final String userDocument;
     private final String creditCardToken;
     private final long value;
 
-    protected UserDto(String id, String userDocument, String creditCardToken, long value) {
+    protected UserDTO(Long id, String userDocument, String creditCardToken, long value) {
         this.id = id;
         this.userDocument = userDocument;
         this.creditCardToken = creditCardToken;
@@ -26,7 +31,7 @@ public abstract class UserDto {
         return value;
     }
 
-    public String getId(){
+    public Long getId(){
         return id;
     }
 }
